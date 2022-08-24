@@ -23,7 +23,7 @@ mkdir -p $VIRTUALENV_BASE_PATH
 python3 -m venv $VIRTUALENV_BASE_PATH/$VIRTUALENV_NAME
 
 $VIRTUALENV_BASE_PATH/$VIRTUALENV_NAME/bin/pip install -r $PROJECT_BASE_PATH/profiles-rest-api/requirements.txt
-
+$VIRTUALENV_BASE_PATH/$VIRTUALENV_NAME/bin/pip install uwsgi
 # Run migrations
 cd $PROJECT_BASE_PATH/profiles-rest-api
 $VIRTUALENV_BASE_PATH/$VIRTUALENV_NAME/bin/python manage.py migrate
