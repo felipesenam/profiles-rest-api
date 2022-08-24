@@ -7,7 +7,7 @@ PROJECT_GIT_URL='https://github.com/felipesenam/profiles-rest-api.git'
 
 PROJECT_BASE_PATH='/usr/local/apps'
 VIRTUALENV_BASE_PATH='/usr/local/virtualenvs'
-
+VIRTUALENV_NAME='profiles_api'
 # Set Ubuntu Language
 locale-gen en_GB.UTF-8
 
@@ -20,14 +20,14 @@ mkdir -p $PROJECT_BASE_PATH
 git clone $PROJECT_GIT_URL $PROJECT_BASE_PATH/profiles-rest-api
 
 mkdir -p $VIRTUALENV_BASE_PATH
-python3 -m venv $VIRTUALENV_BASE_PATH/profiles_api
+python3 -m venv $VIRTUALENV_BASE_PATH/$VIRTUALENV_NAME
 
-$VIRTUALENV_BASE_PATH/profiles_api/bin/pip install -r $PROJECT_BASE_PATH/profiles-rest-api/requirements.txt
+$VIRTUALENV_BASE_PATH/$VIRTUALENV_NAME/bin/pip install -r $PROJECT_BASE_PATH/profiles-rest-api/requirements.txt
 
 # Run migrations
 cd $PROJECT_BASE_PATH/profiles-rest-api
-$VIRTUALENV_BASE_PATH/env/bin/python manage.py migrate
-$VIRTUALENV_BASE_PATH/env/bin/python manage.py collectstatic --noinput
+$VIRTUALENV_BASE_PATH/$VIRTUALENV_NAME/bin/python manage.py migrate
+$VIRTUALENV_BASE_PATH/$VIRTUALENV_NAME/bin/python manage.py collectstatic --noinput
 
 # Setup Supervisor to run our uwsgi process.
 cp $PROJECT_BASE_PATH/profiles-rest-api/deploy/supervisor_profiles_api.conf /etc/supervisor/conf.d/profiles_api.conf
